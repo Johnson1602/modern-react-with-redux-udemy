@@ -1,9 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import CommentDetail from './CommentDetail'
 
 const App = () => {
   return (
-    <div>Hi there!</div>
+    <div className="ui container comments">
+      <CommentDetail />
+      <CommentDetail />
+      <CommentDetail />
+    </div>
   )
 }
 
