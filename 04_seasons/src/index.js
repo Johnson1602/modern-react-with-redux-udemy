@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import SeasonDisplay from './SeasonDisplay'
+import Spinner from './Spinner'
 
 class App extends React.Component {
   // 直接初始化 state
@@ -23,10 +24,9 @@ class App extends React.Component {
   }
 
   render() {
-    // if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
-    // if (this.state.lat && !this.state.errorMessage) return <div>Latitude: {this.state.lat}</div>
-    // return <div>Loading...</div>
-    return <SeasonDisplay lat={this.state.lat} />
+    if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
+    if (this.state.lat && !this.state.errorMessage) return <SeasonDisplay lat={this.state.lat} />
+    return <Spinner content='Please allow us to get your location...' />
   }
 }
 
