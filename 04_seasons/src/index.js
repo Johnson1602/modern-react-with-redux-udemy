@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import SeasonDisplay from './SeasonDisplay'
+
 class App extends React.Component {
   // 直接初始化 state
   // 等价于重写 constructor() 方法并调用 super() 方法并初始化 state
@@ -21,9 +23,10 @@ class App extends React.Component {
   }
 
   render() {
-    if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
-    if (this.state.lat && !this.state.errorMessage) return <div>Latitude: {this.state.lat}</div>
-    return <div>Loading...</div>
+    // if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
+    // if (this.state.lat && !this.state.errorMessage) return <div>Latitude: {this.state.lat}</div>
+    // return <div>Loading...</div>
+    return <SeasonDisplay lat={this.state.lat} />
   }
 }
 
