@@ -2,16 +2,11 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 class App extends React.Component {
-  // state 需要在最开始进行初始化，所以放在 constructor 里
-  constructor(props) {
-    // 由于是继承关系，所以要先调用父组件的 constructor
-    super(props)
-
-    // THIS IS THE ONLY TIME we directly assign this.state
-    this.state = {
-      lat: null,
-      errorMessage: ''
-    }
+  // 直接初始化 state
+  // 等价于重写 constructor() 方法并调用 super() 方法并初始化 state
+  state = {
+    lat: null,
+    errorMessage: ''
   }
 
   componentDidMount() {
