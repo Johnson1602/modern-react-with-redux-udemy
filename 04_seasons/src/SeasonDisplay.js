@@ -1,13 +1,17 @@
 import React from 'react'
 
+import './SeasonDisplay.css'
+
 const seasonConfig = {
   summer: {
     text: "Let's hit the beach!",
-    iconName: 'sun'
+    iconName: 'sun',
+    className: 'season-display--summer'
   },
   winter: {
     text: 'Burr, it is cold!',
-    iconName: 'snowflake'
+    iconName: 'snowflake',
+    className: 'season-display--winter'
   }
 }
 
@@ -22,13 +26,13 @@ const getSeason = (lat, month) => {
 const SeasonDisplay = props => {
   // 通过纬度（南北半球）和月份获取当前的季节
   const season = getSeason(props.lat, new Date().getMonth())
-  const { text, iconName } = seasonConfig[season]
+  const { text, iconName, className } = seasonConfig[season]
 
   return (
-    <div>
-      <i className={`icon ${iconName}`} />
+    <div className={`season-display ${className}`}>
+      <i className={`icon massive icon-left ${iconName}`} />
       <h1>{text}</h1>
-      <i className={`icon ${iconName}`} />
+      <i className={`icon massive icon-right ${iconName}`} />
     </div>
   )
 }
