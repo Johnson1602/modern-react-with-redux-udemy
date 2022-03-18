@@ -26,7 +26,7 @@ class App extends React.Component {
   render() {
     if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
     if (this.state.lat && !this.state.errorMessage) return <SeasonDisplay lat={this.state.lat} />
-    return <Spinner content='Please allow us to get your location...' />
+    return <Spinner message='Please allow us to get your location...' />
   }
 }
 
