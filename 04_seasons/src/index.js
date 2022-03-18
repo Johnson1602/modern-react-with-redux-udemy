@@ -23,10 +23,20 @@ class App extends React.Component {
     )
   }
 
-  render() {
+  // 当需要根据条件返回不同的 JSX 时
+  // 最好写一个 helper function 来处理这些逻辑
+  renderContent() {
     if (!this.state.lat && this.state.errorMessage) return <div>Error: {this.state.errorMessage}</div>
     if (this.state.lat && !this.state.errorMessage) return <SeasonDisplay lat={this.state.lat} />
     return <Spinner message='Please allow us to get your location...' />
+  }
+
+  render() {
+    return (
+      <div className='wrapper'>
+        {this.renderContent()}
+      </div>
+    )
   }
 }
 
