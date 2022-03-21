@@ -4,6 +4,6 @@
   gap: 10px;
 }
 
-.image-list .image-list__img {
+.image-list .image-list__card .image-list__img {
   width: 250px;
 }
