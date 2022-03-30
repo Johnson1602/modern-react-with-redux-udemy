@@ -28,6 +28,26 @@ const Search = () => {
     !!term && search()
   }, [term])
 
+  const renderedResults = results.map((result) => {
+    return (
+      <div key={result.pageid} className="item">
+        <div className="right floated content">
+          <a
+            className="ui button"
+            href={`https://en.wikipedia.org/?curid=${result.pageid}`}
+            target="_blank"
+          >
+            Go
+          </a>
+        </div>
+        <div className="content">
+          <div className="header">{result.title}</div>
+          <p dangerouslySetInnerHTML={{ __html: result.snippet }}></p>
+        </div>
+      </div>
+    )
+  })
+
   return (
     <div>
       <div className="ui form">
@@ -42,7 +62,7 @@ const Search = () => {
           />
         </div>
       </div>
-      <div className="search__result">Result</div>
+      <div className="ui celled list search__result">{renderedResults}</div>
     </div>
   )
 }
