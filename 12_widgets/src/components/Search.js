@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const Search = () => {
-  const [term, setTerm] = useState('')
+  const [term, setTerm] = useState('programming')
   const [results, setResults] = useState([])
 
   const onTermChange = (e) => {
@@ -25,7 +25,23 @@ const Search = () => {
       setResults(result.data.query.search)
     }
 
-    !!term && search()
+    // trigger a search on initial rendering
+    // must use results.length === 0
+    // cuz !results will return 'true' when results === []
+    if (!!term && results.length === 0) {
+      search()
+    } else {
+      // throttle
+      const timerId = setTimeout(() => {
+        !!term && search()
+      }, 5000)
+
+      // the returned function will be invoked first
+      // when the next time useEffect is invoked
+      return () => {
+        clearTimeout(timerId)
+      }
+    }
   }, [term])
 
   const renderedResults = results.map((result) => {
