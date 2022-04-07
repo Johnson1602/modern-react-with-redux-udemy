@@ -4,6 +4,7 @@ import axios from 'axios'
 
 const Search = () => {
   const [term, setTerm] = useState('programming')
+  const [debouncedTerm, setDebouncedTerm] = useState(term)
   const [results, setResults] = useState([])
 
   const onTermChange = (e) => {
@@ -11,38 +12,34 @@ const Search = () => {
   }
 
   useEffect(() => {
+    const timerId = setTimeout(() => {
+      setDebouncedTerm(term)
+    }, 500)
+
+    return () => {
+      clearTimeout(timerId)
+    }
+  }, [term])
+
+  useEffect(() => {
     const search = async () => {
-      const result = await axios.get('https://en.wikipedia.org/w/api.php', {
+      const { data } = await axios.get('https://en.wikipedia.org/w/api.php', {
         params: {
           action: 'query',
           list: 'search',
           origin: '*',
           format: 'json',
-          srsearch: term,
+          srsearch: debouncedTerm,
         },
       })
 
-      setResults(result.data.query.search)
+      setResults(data.query.search)
     }
 
-    // trigger a search on initial rendering
-    // must use results.length === 0
-    // cuz !results will return 'true' when results === []
-    if (!!term && results.length === 0) {
+    if (debouncedTerm) {
       search()
-    } else {
-      // throttle
-      const timerId = setTimeout(() => {
-        !!term && search()
-      }, 5000)
-
-      // the returned function will be invoked first
-      // when the next time useEffect is invoked
-      return () => {
-        clearTimeout(timerId)
-      }
     }
-  }, [term])
+  }, [debouncedTerm])
 
   const renderedResults = results.map((result) => {
     return (
