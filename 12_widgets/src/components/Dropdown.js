@@ -2,7 +2,8 @@ import React from 'react'
 
 const Dropdown = ({ options, selection, onSelectionChange }) => {
   const renderedOptions = options.map((option) => {
-    return (
+    // dropdown 仅展示未选中的选项
+    return option.value === selection.value ? null : (
       <div
         key={option.value}
         className="item"
