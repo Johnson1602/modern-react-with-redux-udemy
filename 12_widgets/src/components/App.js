@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Accordion from './Accordion'
 import Search from './Search'
 import Dropdown from './Dropdown'
@@ -23,25 +23,31 @@ const ACCORDION_ITEMS = [
 
 const dropdownOptions = [
   {
-    lable: 'The color of Red',
+    label: 'The color of red',
     value: 'red',
   },
   {
-    lable: 'The color of green',
+    label: 'The color of green',
     value: 'green',
   },
   {
-    lable: 'A shade of blue',
+    label: 'A shade of blue',
     value: 'blue',
   },
 ]
 
 const App = () => {
+  const [selection, setSelection] = useState(dropdownOptions[0])
+
   return (
     <div>
       {/* <Accordion items={ACCORDION_ITEMS} /> */}
       {/* <Search /> */}
-      <Dropdown options={dropdownOptions} />
+      <Dropdown
+        options={dropdownOptions}
+        selection={selection}
+        onSelectionChange={setSelection}
+      />
     </div>
   )
 }
